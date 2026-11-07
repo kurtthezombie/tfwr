@@ -1,12 +1,11 @@
 import plants
-import bush
 import traverse
 
 world_size = get_world_size() - 1
+directions = [North, South]
 
 def task():
-      ## plants.[grass,bush,carrot] are functions that will plant the respective entity
-	plants.grass()
+	plants.pumpkin()
 		
 def next_column():
 	move(East)
@@ -16,27 +15,14 @@ def main():
 	while True:
 		task()
 
-		traverse.move_act(North, task)
-
-		next_column()
-
-		traverse.move_act(South, task)
-
-		next_column()
-
-		traverse.move_act(North, task)
-		
-		next_column()
-		
-		traverse.move_act(South, task)
-		
-		next_column()
-
-		traverse.move_act(North, task)
-		
-		next_column()
-		
-		traverse.move_act(South, task)
+		for i in range(get_world_size()):
+			direction = directions[i%2]
+			
+			traverse.traverse(direction, task)
+			
+			if i < world_size:
+				move(East)
+				task()
 
 		# Reset
 		for i in range(world_size):
